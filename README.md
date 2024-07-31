@@ -31,8 +31,8 @@ O projeto está organizado nos seguintes pacotes:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/airline-reservation-system.git
-   cd airline-reservation-system
+   git clone https://github.com/NerinhoAmorim/sistema-de-reserva-de-companhia-a-ra.git
+   cd sistema-de-reserva-de-companhia-a-ra
 
 
 ## Endpoints
