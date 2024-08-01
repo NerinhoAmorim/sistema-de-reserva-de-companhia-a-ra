@@ -2,6 +2,7 @@ package edu.sisreserva.cia.cliente.domain;
 
 import java.util.UUID;
 
+import edu.sisreserva.cia.cliente.application.api.AtualizacaoPassageirosRequest;
 import edu.sisreserva.cia.cliente.application.api.PassageirosRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +39,15 @@ public class Passageiros {
 		this.idade = passageirosRequest.getIdade();
 		this.genero = passageirosRequest.getGenero();
 		this.telefone = passageirosRequest.getTelefone();
+
+	}
+
+	public void atualiza(AtualizacaoPassageirosRequest atualizacaoPassageirosRequest) {
+		this.primeiroNome = atualizacaoPassageirosRequest.getPrimeiroNome();
+		this.ultimoNome = atualizacaoPassageirosRequest.getUltimoNome();
+		this.idade = atualizacaoPassageirosRequest.getIdade();
+		this.genero = atualizacaoPassageirosRequest.getGenero();
+		this.telefone = atualizacaoPassageirosRequest.getTelefone();
 
 	}
 

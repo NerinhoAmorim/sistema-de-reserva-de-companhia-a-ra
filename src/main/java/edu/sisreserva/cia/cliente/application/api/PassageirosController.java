@@ -1,6 +1,7 @@
 package edu.sisreserva.cia.cliente.application.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,34 @@ public class PassageirosController implements PassageirosAPI {
 		List<PassageirosListResponse> passageiros = passageirosService.buscaTodosPassageiros();
 		log.info("[finish] PassageirosController -buscarTodosPassageiros");
 		return passageiros;
+	}
+
+	@Override
+	public PassageirosDetalhadoResponse buscaPassageirosAtravesId(UUID idPassageiros) {
+		log.info("[start] PassageirosController - buscaPassageirosAtravesId");
+		log.info("[idPassageiros] {}", idPassageiros);
+		PassageirosDetalhadoResponse passageirosDetalhado = passageirosService.buscaPassageirosPorId(idPassageiros);
+		log.info("[finish] PassageirosController - buscaPassageirosAtravesId");
+		return passageirosDetalhado;
+	}
+
+	@Override
+	public void deletaPassageirosAtravesId(UUID idPassageiros) {
+		log.info("[start] PassageirosController -deletaPassageirosAtravesId");
+		log.info("[idPassageiros] {}", idPassageiros);
+		passageirosService.deletaPassageirosAtravesId(idPassageiros);
+		log.info("[finish] PassageirosController -deletaPassageirosAtravesId");
+
+	}
+
+	@Override
+	public void atualizaPassageiros(UUID idPassageiros,
+			 AtualizacaoPassageirosRequest atualizacaoPassageirosRequest) {
+		log.info("[start] PassageirosController - atualizaPassageiros");
+		log.info("[idPassageiros] {}", idPassageiros);
+		passageirosService.atualizaPassageiros(idPassageiros, atualizacaoPassageirosRequest);
+		log.info("[finish] PassageirosController - atualizaPassageiros");
+
 	}
 
 }
