@@ -1,5 +1,7 @@
 package edu.sisreserva.cia.Voos.infra;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import edu.sisreserva.cia.Voos.application.repository.VoosRepository;
@@ -19,6 +21,14 @@ public class VoosInfraRepository implements VoosRepository {
 		voosSpringJPARepository.save(voos);
 		log.info("[finish] VoosInfraRepository - salva");
 		return voos;
+	}
+
+	@Override
+	public List<Voos> buscarTodosVoos() {
+		log.info("[start] VoosInfraRepository - buscarTodosVoos");
+		List<Voos> buscaTodosVoos = voosSpringJPARepository.findAll();
+		log.info("[finish] VoosInfraRepository - buscarTodosVoos");
+		return buscaTodosVoos;
 	}
 
 }

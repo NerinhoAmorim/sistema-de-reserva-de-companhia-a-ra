@@ -17,7 +17,9 @@ public class PassageirosListResponse {
 	private String telefone;
 
 	public static List<PassageirosListResponse> converte(List<Passageiros> passageiros) {
-		return passageiros.stream().map(PassageirosListResponse::new).collect(Collectors.toList());
+		return passageiros.stream()
+				.map(PassageirosListResponse::new)
+				.collect(Collectors.toList());
 	}
 
 	private PassageirosListResponse(Passageiros passageiros) {

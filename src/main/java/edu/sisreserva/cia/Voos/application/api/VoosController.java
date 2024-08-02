@@ -1,5 +1,7 @@
 package edu.sisreserva.cia.Voos.application.api;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.sisreserva.cia.Voos.application.service.VoosService;
@@ -19,6 +21,14 @@ public class VoosController implements VoosAPI {
 		VoosResponse voosCriado = voosService.criaVoos(voosRequest);
 		log.info("[finish] VoosController - postVoos ");
 		return voosCriado;
+	}
+
+	@Override
+	public List<VoosListResponse> buscarTodosVoos() {
+		log.info("[start] VoosController - buscarTodosVoos ");
+		List<VoosListResponse> voos = voosService.buscarTodosVoos();
+		log.info("[finish] VoosController - buscarTodosVoos ");
+		return voos;
 	}
 
 }
