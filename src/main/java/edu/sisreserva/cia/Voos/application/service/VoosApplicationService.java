@@ -12,7 +12,6 @@ import edu.sisreserva.cia.Voos.application.api.VoosRequest;
 import edu.sisreserva.cia.Voos.application.api.VoosResponse;
 import edu.sisreserva.cia.Voos.application.repository.VoosRepository;
 import edu.sisreserva.cia.Voos.domain.Voos;
-import edu.sisreserva.cia.cliente.application.service.PassageirosService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,50 +22,44 @@ import lombok.extern.log4j.Log4j2;
 public class VoosApplicationService implements VoosService {
 
 	private final VoosRepository voosRepository;
-	private final PassageirosService passageirosService;
 
 	@Override
-	public VoosResponse criaVoos(UUID idPassageiros, @Valid VoosRequest voosRequest) {
+	public VoosResponse criaVoos( @Valid VoosRequest voosRequest) {
 		log.info("[start] VoosApplicationService - criaVoos");
-		passageirosService.buscaPassageirosPorId(idPassageiros);
-		Voos voos = voosRepository.salvaVoos(new Voos(idPassageiros, voosRequest));
+		Voos voos = voosRepository.salvaVoos(new Voos( voosRequest));
 		log.info("[finish] VoosApplicationService - criaVoos");
-		return new VoosResponse(voos.getIdVoos());
+		return  VoosResponse.builder().idVoos(voos.getIdVoos()).build();
 	}
 
 	@Override
-	public List<VoosListResponse> buscarVoosdpPassageiroComId(UUID idPassageiros) {
-		log.info("[start] VoosApplicationService - buscarVoosdpPassageiroComId");
-		passageirosService.buscaPassageirosPorId(idPassageiros);
-		List<Voos> voosDoPassageiro = voosRepository.buscarVoosDoPassageiroComId(idPassageiros);
-		log.info("[finish] VoosApplicationService - buscarVoosdpPassageiroComId");
-		return VoosListResponse.converte(voosDoPassageiro);
+	public List<VoosListResponse> buscarVoos() {
+		log.info("[start] VoosApplicationService - buscarVoos");
+		List<Voos> voosDetalhado = voosRepository.buscarVoos();
+		log.info("[finish] VoosApplicationService - buscarVoos");
+		return VoosListResponse.converte(voosDetalhado);
 	}
 
 	@Override
-	public VoosDetalhesResponse buscarVoosdoPassageiroComId(UUID idPassageiros, UUID idVoos) {
-		log.info("[start] VoosApplicationService - buscarVoosdoPassageiroComId");
-		passageirosService.buscaPassageirosPorId(idPassageiros);
+	public VoosDetalhesResponse buscarVoosComId( UUID idVoos) {
+		log.info("[start] VoosApplicationService - buscarVoosComId");
 		Voos voos = voosRepository.buscaVoosPeloId(idVoos);
-		log.info("[finish] VoosApplicationService - buscarVoosdoPassageiroComId");
+		log.info("[finish] VoosApplicationService - buscarVoosComId");
 		return new VoosDetalhesResponse(voos);
 	}
 
 	@Override
-	public void deletaVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos) {
-		log.info("[start] VoosApplicationService - deletaVoosDoPassageiroComId");
-		passageirosService.buscaPassageirosPorId(idPassageiros);
+	public void deletaVoosComId( UUID idVoos) {
+		log.info("[start] VoosApplicationService - deletaVoosComId");
 		Voos voos = voosRepository.buscaVoosPeloId(idVoos);
 		voosRepository.deletaVoos(voos);
-		log.info("[finish] VoosApplicationService - deletaVoosDoPassageiroComId");
+		log.info("[finish] VoosApplicationService - deletaVoosComId");
 
 	}
 
 	@Override
-	public void atualizaVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos,
+	public void atualizaVoosComId(UUID idVoos,
 			@Valid VoosAtualizacaoRequest voosAtualizacaoRequest) {
 		log.info("[start] VoosApplicationService - atualizaVoosDoPassageiroComId");
-		passageirosService.buscaPassageirosPorId(idPassageiros);
 		Voos voos = voosRepository.buscaVoosPeloId(idVoos);
 		voosRepository.salvaVoos(voos);
 		log.info("[finish] VoosApplicationService - atualizaVoosDoPassageiroComId");

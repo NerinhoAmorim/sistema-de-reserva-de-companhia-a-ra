@@ -22,8 +22,8 @@ public class VoosListResponse {
 	private int assentosDisponiveis;
 	private double precoPassagem;
 
-	public static List<VoosListResponse> converte(List<Voos> voosDoPassageiro) {
-		return voosDoPassageiro
+	public static List<VoosListResponse> converte(List<Voos> voosDetalhado) {
+		return voosDetalhado
 				.stream()
 				.map(VoosListResponse::new)
 				.collect(Collectors.toList());

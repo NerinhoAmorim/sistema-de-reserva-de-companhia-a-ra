@@ -28,9 +28,9 @@ public class VoosInfraRepository implements VoosRepository {
 	}
 
 	@Override
-	public List<Voos> buscarVoosDoPassageiroComId(UUID idPassageiros) {
+	public List<Voos> buscarVoos() {
 		log.info("[start] VoosInfraRepository - buscarVoosDoPassageiroComId");
-		var voos = voosSpringJPARepository.findByIdPassageiroCliente(idPassageiros);
+		var voos = voosSpringJPARepository.findAll();
 		log.info("[finish] VoosInfraRepository - buscarVoosDoPassageiroComId");
 		return voos;
 	}

@@ -26,9 +26,6 @@ public class Voos {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idVoos", updatable = false, unique = true, nullable = false)
 	private UUID idVoos;
-	@NotNull
-	@Column(columnDefinition = "uuid", name = "idPassageiroCliente", nullable = false)
-	private UUID idPassageiroCliente;
 	@NotBlank
 	private String numeroVoo;
 	@NotBlank
@@ -46,8 +43,7 @@ public class Voos {
 	@NotNull
 	private double precoPassagem;
 
-	public Voos(UUID idPassageiro, @Valid VoosRequest voosRequest) {
-		this.idPassageiroCliente = idPassageiro;
+	public Voos( @Valid VoosRequest voosRequest) {
 		this.numeroVoo = voosRequest.getNumeroVoo();
 		this.origem = voosRequest.getOrigem();
 		this.destino = voosRequest.getDestino();

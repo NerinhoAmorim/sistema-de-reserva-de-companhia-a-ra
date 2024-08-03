@@ -18,46 +18,44 @@ public class VoosController implements VoosAPI {
 	private final VoosService voosService;
 
 	@Override
-	public VoosResponse postVoos(UUID idPassageiros, @Valid VoosRequest voosRequest) {
+	public VoosResponse postVoos( @Valid VoosRequest voosRequest) {
 		log.info("[start] VoosController - postVoos ");
-		log.info("[idPassageiros] {}", idPassageiros);
-		VoosResponse voos = voosService.criaVoos(idPassageiros, voosRequest);
+		VoosResponse voos = voosService.criaVoos( voosRequest);
 		log.info("[finish] VoosController - postVoos ");
 		return voos;
 	}
 
 	@Override
-	public List<VoosListResponse> buscarVoosDoPassageiroComId(UUID idPassageiros) {
+	public List<VoosListResponse> buscarVoos() {
 		log.info("[start] VoosController - buscarVoosDoPassageiroComId ");
-		log.info("[idPassageiros] {}", idPassageiros);
-		List<VoosListResponse> voosDoPassageiro = voosService.buscarVoosdpPassageiroComId(idPassageiros);
+		List<VoosListResponse> detalhaVoos = voosService.buscarVoos();
 		log.info("[finish] VoosController - buscarVoosDoPassageiroComId ");
-		return voosDoPassageiro;
+		return detalhaVoos;
 	}
 
 	@Override
-	public VoosDetalhesResponse bucaVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos) {
+	public VoosDetalhesResponse bucaVoosComId( UUID idVoos) {
 		log.info("[start] VoosController - buscaVoosDoPassageiroComId ");
-		log.info("[idPassageiros] {} - [idVoos]", idPassageiros, idVoos);
-		VoosDetalhesResponse voos = voosService.buscarVoosdoPassageiroComId(idPassageiros, idVoos);
+		log.info(" [idVoos]", idVoos);
+		VoosDetalhesResponse voos = voosService.buscarVoosComId( idVoos);
 		log.info("[start] VoosController - buscaVoosDoPassageiroComId ");
 		return voos;
 	}
 
 	@Override
-	public void deleteVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos) {
+	public void deleteVoosComId( UUID idVoos) {
 		log.info("[start] VoosController - deleteVoosDoPassageiroComId ");
-		log.info("[idPassageiros] {} - [idVoos]", idPassageiros, idVoos);
-		voosService.deletaVoosDoPassageiroComId(idPassageiros, idVoos);
+		log.info("[idVoos]",  idVoos);
+		voosService.deletaVoosComId(idVoos);
 		log.info("[finish] VoosController - deleteVoosDoPassageiroComId ");
 
 	}
 
 	@Override
-	public void atualizaVoos(UUID idPassageiros, UUID idVoos, @Valid VoosAtualizacaoRequest voosAtualizacaoRequest) {
+	public void atualizaVoos(UUID idVoos, @Valid VoosAtualizacaoRequest voosAtualizacaoRequest) {
 		log.info("[start] VoosController - atualizaVoos ");
-		log.info("[idPassageiros] {} - [idVoos]", idPassageiros, idVoos);
-		voosService.atualizaVoosDoPassageiroComId(idPassageiros, idVoos, voosAtualizacaoRequest);
+		log.info("[idVoos]",  idVoos);
+		voosService.atualizaVoosComId(idVoos, voosAtualizacaoRequest);
 		log.info("[finish] VoosController - atualizaVoos ");
 
 	}

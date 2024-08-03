@@ -11,12 +11,11 @@ import edu.sisreserva.cia.Voos.application.api.VoosResponse;
 import jakarta.validation.Valid;
 
 public interface VoosService {
-	VoosResponse criaVoos(UUID idPassageiros, @Valid VoosRequest voosRequest);
-	List<VoosListResponse> buscarVoosdpPassageiroComId(UUID idPassageiros);
-	VoosDetalhesResponse buscarVoosdoPassageiroComId(UUID idPassageiros, UUID idVoos);
-	void deletaVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos);
-	void atualizaVoosDoPassageiroComId(UUID idPassageiros, UUID idVoos,
-			@Valid VoosAtualizacaoRequest voosAtualizacaoRequest);
-
+	VoosResponse criaVoos(@Valid VoosRequest voosRequest);
+	List<VoosListResponse> buscarVoos();
+	VoosDetalhesResponse buscarVoosComId(UUID idVoos);
+	void deletaVoosComId(UUID idVoos);
+	void atualizaVoosComId(UUID idVoos, @Valid VoosAtualizacaoRequest voosAtualizacaoRequest);
+	
 
 }

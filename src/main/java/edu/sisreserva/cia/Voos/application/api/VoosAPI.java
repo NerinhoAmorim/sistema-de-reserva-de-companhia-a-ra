@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/passageiros/{idPassageiros}/voos")
+@RequestMapping("/v1/voos")
 public interface VoosAPI {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	VoosResponse postVoos(UUID idPassageiros, @Valid @RequestBody VoosRequest voosRequest);
+	VoosResponse postVoos( @Valid @RequestBody VoosRequest voosRequest);
 
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	List<VoosListResponse> buscarVoosDoPassageiroComId(@PathVariable UUID idPassgeiros);
+	List<VoosListResponse> buscarVoos();
 
 	@GetMapping(value = "/{idVoos}")
 	@ResponseStatus(code = HttpStatus.OK)
-	VoosDetalhesResponse bucaVoosDoPassageiroComId(@PathVariable UUID idPassageiros, @PathVariable UUID idVoos);
+	VoosDetalhesResponse bucaVoosComId( @PathVariable UUID idVoos);
 
 	@DeleteMapping(value = "/{idVoos}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void deleteVoosDoPassageiroComId(@PathVariable UUID idPassageiros, @PathVariable UUID idVoos);
+	void deleteVoosComId( @PathVariable UUID idVoos);
 
 	@PatchMapping(value = "/{idVoos}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void atualizaVoos(@PathVariable UUID idPassageiros, @PathVariable UUID idVoos,
+	void atualizaVoos(@PathVariable UUID idVoos,
 			@Valid @RequestBody VoosAtualizacaoRequest voosAtualizacaoRequest);
 
 }

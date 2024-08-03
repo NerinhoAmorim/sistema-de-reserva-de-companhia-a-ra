@@ -7,7 +7,7 @@ import edu.sisreserva.cia.Voos.domain.Voos;
 
 public interface VoosRepository {
 	Voos salvaVoos(Voos voos);
-	List<Voos> buscarVoosDoPassageiroComId(UUID idPassageiros);
+	List<Voos> buscarVoos();
 	Voos buscaVoosPeloId(UUID idVoos);
 	void deletaVoos(Voos voos);
 
