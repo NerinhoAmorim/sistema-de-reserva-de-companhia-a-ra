@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -25,6 +26,9 @@ public class Voos {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idVoos", updatable = false, unique = true, nullable = false)
 	private UUID idVoos;
+	@NotNull
+	@Column(columnDefinition = "uuid", name = "idPassageiroCliente", nullable = false)
+	private UUID idPassageiroCliente;
 	@NotBlank
 	private String numeroVoo;
 	@NotBlank
@@ -42,7 +46,8 @@ public class Voos {
 	@NotNull
 	private double precoPassagem;
 
-	public Voos(VoosRequest voosRequest) {
+	public Voos(UUID idPassageiro, @Valid VoosRequest voosRequest) {
+		this.idPassageiroCliente = idPassageiro;
 		this.numeroVoo = voosRequest.getNumeroVoo();
 		this.origem = voosRequest.getOrigem();
 		this.destino = voosRequest.getDestino();

@@ -1,15 +1,13 @@
 package edu.sisreserva.cia.Voos.application.api;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import edu.sisreserva.cia.Voos.domain.Voos;
 import lombok.Value;
 
 @Value
-public class VoosListResponse {
+public class VoosDetalhesResponse {
 	private UUID idVoos;
 	private String numeroVoo;
 	private String origem;
@@ -22,30 +20,18 @@ public class VoosListResponse {
 	private int assentosDisponiveis;
 	private double precoPassagem;
 
-	public static List<VoosListResponse> converte(List<Voos> voosDoPassageiro) {
-		return voosDoPassageiro
-				.stream()
-				.map(VoosListResponse::new)
-				.collect(Collectors.toList());
-	}
-	
-
-	public VoosListResponse(Voos voos) {
+	public VoosDetalhesResponse(Voos voos) {
 		this.idVoos = voos.getIdVoos();
 		this.numeroVoo = voos.getNumeroVoo();
 		this.origem = voos.getOrigem();
 		this.destino = voos.getDestino();
-		this.dataHoraPartida = voos.getDataHoraChegada();
+		this.dataHoraPartida = voos.getDataHoraPartida();
 		this.dataHoraChegada = voos.getDataHoraChegada();
 		this.companhiaAerea = voos.getCompanhiaAerea();
 		this.aeronave = voos.getAeronave();
 		this.capacidade = voos.getCapacidade();
 		this.assentosDisponiveis = voos.getAssentosDisponiveis();
 		this.precoPassagem = voos.getPrecoPassagem();
-
 	}
-
-
-
 
 }
