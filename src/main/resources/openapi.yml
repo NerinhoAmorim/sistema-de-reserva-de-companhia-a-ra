@@ -1,0 +1,397 @@
+openapi: 3.0.0
+info:
+  title: Sistema de Reservas de Companhias Aéreas
+  description: API para gerenciamento de reservas de voos.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /passageiros:
+    post:
+      summary: Cria um novo passageiro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Passenger'
+      responses:
+        '201':
+          description: Passageiro criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+    get:
+      summary: Lista todos os passageiros
+      responses:
+        '200':
+          description: Lista de passageiros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+
+  /passageiros/{id}:
+    get:
+      summary: Obtém um passageiro pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do passageiro
+      responses:
+        '200':
+          description: Detalhes do passageiro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+    put:
+    patch:
+      summary: Atualiza um passageiro pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do passageiro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Passenger'
+      responses:
+        '200':
+          description: Passageiro atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+    delete:
+      summary: Remove um passageiro pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do passageiro
+      responses:
+        '204':
+          description: Passageiro removido
+
+  /voos:
+    post:
+      summary: Cria um novo voo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '201':
+          description: Voo criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+    get:
+      summary: Lista todos os voos
+      responses:
+        '200':
+          description: Lista de voos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+
+  /voos/{flightNumber}:
+    get:
+      summary: Obtém um voo pelo número do voo
+      parameters:
+        - in: path
+          name: flightNumber
+          required: true
+          schema:
+            type: string
+          description: Número do voo
+      responses:
+        '200':
+          description: Detalhes do voo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+    put:
+    patch:
+      summary: Atualiza um voo pelo número do voo
+      parameters:
+        - in: path
+          name: flightNumber
+          required: true
+          schema:
+            type: string
+          description: Número do voo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '200':
+          description: Voo atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+    delete:
+      summary: Remove um voo pelo número do voo
+      parameters:
+        - in: path
+          name: flightNumber
+          required: true
+          schema:
+            type: string
+          description: Número do voo
+      responses:
+        '204':
+          description: Voo removido
+
+  /reservas:
+    post:
+      summary: Cria uma nova reserva
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '201':
+          description: Reserva criada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+    get:
+      summary: Lista todas as reservas
+      responses:
+        '200':
+          description: Lista de reservas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+
+  /reservas/{id}:
+    get:
+      summary: Obtém uma reserva pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID da reserva
+      responses:
+        '200':
+          description: Detalhes da reserva
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+    put:
+    patch:
+      summary: Atualiza uma reserva pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID da reserva
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '200':
+          description: Reserva atualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+    delete:
+      summary: Remove uma reserva pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID da reserva
+      responses:
+        '204':
+          description: Reserva removida
+
+  /planes:
+    post:
+      summary: Cria um novo avião
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plane'
+      responses:
+        '201':
+          description: Avião criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plane'
+    get:
+      summary: Lista todos os aviões
+      responses:
+        '200':
+          description: Lista de aviões
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plane'
+
+  /planes/{id}:
+    get:
+      summary: Obtém um avião pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do avião
+      responses:
+        '200':
+          description: Detalhes do avião
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plane'
+    put:
+    patch:
+      summary: Atualiza um avião pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do avião
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plane'
+      responses:
+        '200':
+          description: Avião atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plane'
+    delete:
+      summary: Remove um avião pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do avião
+      responses:
+        '204':
+          description: Avião removido
+
+components:
+  schemas:
+    Passenger:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+
+    Flight:
+      type: object
+      properties:
+        id:
+          type: integer
+        airline:
+          type: string
+        flightNumber:
+          type: string
+        departure:
+          type: string
+          format: date-time
+        arrival:
+          type: string
+          format: date-time
+        origin:
+          type: string
+        destination:
+          type: string
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        flightId:
+          type: integer
+        passengerId:
+          type: integer
+        seatNumber:
+          type: string
+        status:
+          type: string
+          enum:
+            - CONFIRMED
+            - CANCELLED
+
+    Plane:
+      type: object
+      properties:
+        id:
+          type: integer
+        model:
+          type: string
+        manufacturer:
+          type: string
+        capacity:
+          type: integer
